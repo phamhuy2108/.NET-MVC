@@ -1,0 +1,215 @@
+﻿
+@{
+    Layout = null;
+}
+@Styles.Render("~/Content/ThemSach.css")
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8">
+    <title>Thêm sách</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        .dropbtn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 16px;
+            font-size: 16px;
+            border: none;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f1f1f1;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+            .dropdown-content a {
+                color: black;
+                padding: 12px 16px;
+                text-decoration: none;
+                display: block;
+            }
+
+                .dropdown-content a:hover {
+                    background-color: #ddd;
+                }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown:hover .dropbtn {
+            background-color: #3e8e41;
+        }
+    </style>
+</head>
+<body>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <header>
+        <div class="row">
+            <div id="box1" class="col">
+                <a href="~/Sach/TrangChu"><img class="img-responsive" src="~/Image/logo.png" alt="logo"></a>
+            </div>
+            <div id="box2" class="col">
+                <div class="search-container">
+                    <form method="get" action="~/Sach/TimKiem">
+                        <input type="text" name="tensach" placeholder="Tìm kiếm sản phẩm">
+                        <button>Tìm</button>
+                    </form>
+                </div>
+            </div>
+            <div class="col">
+                <div id="box3">
+                    <a href="http://localhost:60030/Sach/DangNhap"> <i class="fa fa-sign-in"></i> Đăng nhập</a>
+                    <a href="http://localhost:60030/Sach/DangKy"> <i class="fa fa-pencil-square-o"></i> Đăng ký</a>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="row1">
+        <div class="col1">
+            <div id="box1">
+                <div class="menu1">
+                    <ul>
+                        <div id="danhmuc">
+                            <li>DANH MỤC</li>
+                        </div>
+                        <li><a href="http://localhost:60030/Sach/SanPham">Top sách hay</a></li>
+                        <li><a href="http://localhost:60030/Sach/SanPham">Sách kinh tế</a></li>
+                        <li><a href="http://localhost:60030/Sach/SanPham">Sách tâm lý</a></li>
+                        <li><a href="http://localhost:60030/Sach/SanPham">Sách khoa học</a></li>
+                        <li><a href="http://localhost:60030/Sach/SanPham">Sách khoa học</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col1">
+            <div id="box2">
+                <div class="DangKy">
+                    <div style="margin-bottom:20px">
+                        <P style="display:inline">THÊM SÁCH</P>
+                        <div class="dropdown">
+                            <a href="#" style="display:inline"> <i class="fa fa-bars" aria-hidden="true"></i></a>
+                            <div class="dropdown-content">
+                                <a href="~/Sach/DSTacGia">DS Tác Giả</a>
+                                <a href="~/Sach/DSNCC">DS Nhà Cung Cấp</a>
+                                <a href="~/Sach/DSNXB">DS Nhà Xuất Bản</a>
+                                <a href="~/Sach/DSTheLoai">DS Thể Loại</a>
+                            </div>
+                        </div>
+                        </div>
+                    <div class="input-dangky">
+                        <form action="~/Sach/ThemSach" method="post" enctype="multipart/form-data">
+                            <input type="file" name="myfile">
+                            <div class="input-dangky1">
+                                <p>Nhà cung cấp:</p>
+                                <select name="mancc" id="quyen">
+                                    @foreach (var listncc in ViewBag.ListNCC)
+                                    {
+                                        <option value="@listncc.mancc">@listncc.tenncc</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="input-dangky1">
+                                <p>Hình thức:</p>
+                                <select name="mahinhthuc" id="quyen">
+                                    @foreach (var listht in ViewBag.ListHinhThuc)
+                                    {
+                                        <option value="@listht.mahinhthuc">@listht.tenhinhthuc</option>
+                                        @*<option value="0">BCD</option>*@
+                                    }
+                                </select>
+                            </div>
+                            <div class="input-dangky1">
+                                <p>Tác giả:</p>
+                                <select name="matacgia" id="quyen">
+                                    @foreach (var listtg in ViewBag.ListTacGia)
+                                    {
+                                        <option value="@listtg.matacgia">@listtg.tentacgia</option>
+                                        @*<option value="0">BCD</option>*@
+                                    }
+                                </select>
+                            </div>
+                            <div class="input-dangky1">
+                                <p>Nhà xuất bản</p>
+                                <select name="manxb" id="quyen">
+                                    @foreach (var listnxb in ViewBag.ListNXB)
+                                    {
+                                        <option value="@listnxb.manxb">@listnxb.tennxb</option>
+                                        @*<option value="0">BCD</option>*@
+                                    }
+                                </select>
+                            </div>
+                            <div class="input-dangky1">
+                                <p>Thể loại:</p>
+                                <select name="matl" id="quyen">
+                                    @foreach (var listtl in ViewBag.ListTheLoai)
+                                    {
+                                        <option value="@listtl.matl">@listtl.tentheloai</option>
+                                        @*<option value="0">BCD</option>*@
+                                    }
+                                </select>
+                            </div>
+                            <input type="text" placeholder="Tên Sách" name="tensach">
+                            <input type="number" placeholder="Giá sách" name="gia">
+                            <input type="submit" value="Thêm">
+                        </form>
+                        <ul>
+                            <li>Trang chủ</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="social-network">
+        <div class="row-image6" id="intro=image6">
+            <div class="col-image6">
+                <div id="box1-image6">
+                    <button><i class="fa fa-facebook"></i></button>
+                </div>
+            </div>
+            <div class="col-image6">
+                <div id="box2-image6">
+                    <button><i class="fa fa-instagram"></i></button>
+                </div>
+            </div>
+
+            <div class="col-image6">
+                <div id="box3-image6">
+                    <button><i class="fa  fa-youtube-play"></i></button>
+                </div>
+            </div>
+            <div class="col-image6">
+                <div id="box4-image6">
+                    <button><i class="fa  fa-twitter"></i></button>
+                </div>
+            </div>
+            <div class="col-image6">
+                <div id="box5-image6">
+                    <button><i class="fa fa-google-plus-square"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div class="logo">
+            <img class="img-responsive" src="~/Image/logo.png" alt="logo">
+            </img>
+        </div>
+        <div class="copy-right">
+            <p>© By Phạm Tường Huy</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,236 @@
+﻿
+@{
+    Layout = null;
+}
+@Styles.Render("~/Content/SanPham.css")
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<title>Sản phẩm</title>
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        .dropbtn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 16px;
+            font-size: 16px;
+            border: none;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f1f1f1;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+            .dropdown-content a {
+                color: black;
+                padding: 12px 16px;
+                text-decoration: none;
+                display: block;
+            }
+
+                .dropdown-content a:hover {
+                    background-color: #ddd;
+                }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown:hover .dropbtn {
+            background-color: #3e8e41;
+        }
+    </style>
+</head>
+<body>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<header>
+
+</header>
+    <div class="abc">
+        <div class="row" style="z-index:2">
+            <div id="box1" class="col">
+                <a href="~/Sach/TrangChu"><img class="img-responsive" src="~/Image/logo.png" alt="logo"></a>
+            </div>
+            <div id="box2" class="col">
+                <div class="search-container">
+                    <form method="get" action="~/Sach/TimKiem">
+                        <input type="text" name="tensach" placeholder="Tìm kiếm sản phẩm">
+                        <button>Tìm</button>
+                    </form>
+                </div>
+            </div>
+            <div class="col">
+                <div id="box3">
+                    @if (Session["taikhoan"] != null && !Session["taikhoan"].Equals(""))
+                    {
+                        if (Session["quyen"].ToString() != "admin")
+                        {
+                            <div class="dropdown">
+                                <a href="#"><i class="fa fa-user" aria-hidden="true"></i> @Session["taikhoan"]</a>
+                                <div class="dropdown-content">
+                                    <a href="#">Thông tin tài khoản</a>
+                                    <a href="#">Đơn hàng</a>
+                                    <a href="~/Sach/DangXuat">Đăng xuất</a>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="dropdown">
+                                <a href="#"><i class="fa fa-user" aria-hidden="true"></i> @Session["taikhoan"]</a>
+                                <div class="dropdown-content">
+                                    <a href="#">Thông tin tài khoản</a>
+                                    <a href="#">Đơn hàng</a>
+                                    <a href="~/Sach/DangXuat">Đăng xuất</a>
+                                </div>
+                            </div>
+                        }
+                        <a href="~/Sach/GioHang"> <i class="fa fa-shopping-cart" aria-hidden="true"></i> Giỏ hàng(@ViewBag.SoLuong)</a>
+                        if (Session["quyen"].ToString() == "admin")
+                        {
+                            <div class="dropdown">
+
+                                <a href="#"> <i class="fa fa-bars" aria-hidden="true"></i> Quản lý</a>
+                                <div class="dropdown-content">
+                                    <a href="~/Sach/QuanLy">Biểu đồ</a>
+                                    <a href="~/Sach/QuanLyKhachHang">QL khách hàng</a>
+                                    <a href="~/Sach/QuanLySanPham">Quản lý sản phẩm</a>
+                                    <a href="~/Sach/LichSuHeThong">Lịch sử hệ thống</a>
+                                    <a href="~/Sach/LichSuMuaSach">Lịch sử bán</a>
+                                </div>
+                            </div>}
+                    }
+                    else
+                    {
+                        <a href="~/Sach/DangNhap"> <i class="fa fa-sign-in"></i> Đăng nhập</a>
+                        <a href="~/Sach/DangKy"> <i class="fa fa-pencil-square-o"></i> Đăng ký</a>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="row1" style="z-index:1">
+            <div class="col1">
+                <div id="box1">
+                    <div class="menu1">
+                        <ul>
+                            <div id="danhmuc">
+                                <li>DANH MỤC</li>
+                            </div>
+                            <li><a href="http://localhost:60030/Sach/SanPham">Top sách hay</a></li>
+                            <li><a href="http://localhost:60030/Sach/SanPham">Sách kinh tế</a></li>
+                            <li><a href="http://localhost:60030/Sach/SanPham">Sách tâm lý</a></li>
+                            <li><a href="http://localhost:60030/Sach/SanPham">Sách khoa học</a></li>
+                            <li><a href="http://localhost:60030/Sach/SanPham">Sách khoa học</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col1">
+                <div id="box2">
+                    <div class="tam-ly">
+                        <div class="row-title3">
+                            <div id="box1-title3" class="col-title3">
+                                <ul>
+                                    <li>
+                                        SÁCH TÂM LÝ
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row-image4">
+                        @foreach (var sach in ViewBag.ListSach)
+                        {
+                            <div id="box1-image4" class="col-image4">
+                                <img src="~/UploadedFiles/@sach.hinh" />
+                                <a href="http://localhost:60030/Sach/ChiTiet?masach=@sach.masach">@sach.tensach</a>
+                                <p>@sach.gia đ</p>
+                            </div>
+                        }
+                    </div>
+                    <div class="row-image1">
+                        @foreach (var sach in ViewBag.ListSach)
+                        {
+                            <div id="box1-image1" class="col-image1">
+                                <img src="~/UploadedFiles/@sach.hinh" />
+                                <a href="http://localhost:60030/Sach/ChiTiet?masach=@sach.masach">@sach.tensach</a>
+                                <p>@sach.gia đ</p>
+                            </div>
+                        }
+                    </div>
+                    <div class="row-image2">
+                        @foreach (var sach in ViewBag.ListSach)
+                        {
+                            <div id="box1-image2" class="col-image2">
+                                <img src="~/UploadedFiles/@sach.hinh" />
+                                <a href="http://localhost:60030/Sach/ChiTiet?masach=@sach.masach">@sach.tensach</a>
+                                <p>@sach.gia đ</p>
+                            </div>
+                        }
+                    </div>
+                    <div class="row-image3">
+                        @foreach (var sach in ViewBag.ListSach)
+                        {
+                            <div id="box1-image3" class="col-image3">
+                                <img src="~/UploadedFiles/@sach.hinh" />
+                                <a href="http://localhost:60030/Sach/ChiTiet?masach=@sach.masach">@sach.tensach</a>
+                                <p>@sach.gia đ</p>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<div class="social-network">
+<div class="row-image6" id ="intro=image6">
+<div  class="col-image6">
+  <div id="box1-image6">
+    <button><i class="fa fa-facebook"></i></button>
+      </div>
+  </div>
+      <div class="col-image6">
+        <div id="box2-image6">
+        <button><i class="fa fa-instagram"></i></button>
+        </div>
+      </div>
+        
+      <div class="col-image6">
+        <div id="box3-image6">
+        <button><i class="fa  fa-youtube-play"></i></button>
+  </div>
+  </div>
+  <div class="col-image6">
+      <div id="box4-image6">  
+        <button><i class="fa  fa-twitter"></i></button>
+  </div>
+  </div>
+  <div class="col-image6">
+        <div id="box5-image6">
+        <button><i class="fa fa-google-plus-square"></i></button>
+  </div>
+  </div>
+</div>
+</div>
+  <footer>
+    <div class="logo">
+    <img class="img-responsive" src="~/Image/logo.png" alt="logo">
+    </img>
+    </div>
+    <div class="copy-right">
+    <p>© By Phạm Tường Huy</p>
+    </div>
+  </footer>
+</body>
+	</html>

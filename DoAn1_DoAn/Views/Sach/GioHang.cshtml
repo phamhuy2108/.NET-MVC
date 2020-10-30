@@ -1,0 +1,266 @@
+﻿
+@{
+    Layout = null;
+}
+@Styles.Render("~/Content/GioHang.css")
+<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.0.min.js"></script>
+<script src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <title>Giỏ hàng</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        .dropbtn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 16px;
+            font-size: 16px;
+            border: none;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f1f1f1;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+            .dropdown-content a {
+                color: black;
+                padding: 12px 16px;
+                text-decoration: none;
+                display: block;
+            }
+
+                .dropdown-content a:hover {
+                    background-color: #ddd;
+                }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown:hover .dropbtn {
+            background-color: #3e8e41;
+        }
+    </style>
+</head>
+<body id="bd1">
+   @foreach (var cart in ViewBag.GioHang)
+   {
+       string a = "form" + @cart.mactgiohang;
+       string b = "ip" + @cart.mactgiohang;
+    <script type="text/javascript">
+    $(document).ready(function()
+    {
+        $("#@b").change(function () {
+            $("#@a").submit();
+       });
+   });
+    </script>
+   }
+    @*<script type="text/javascript">
+        $(document).ready(function()
+        {
+            $("#ipthanhtoan").click(function () {
+                $("[id^='btxoa']").each(function () {
+                    $("[id^='btxoa']").click();
+                });
+                $("[id^='btxoa']").click(function () {
+                    alert("[id^='btxoa']");
+                });
+            });
+        });
+    </script>*@
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <header>
+
+    </header>
+    <div class="abc">
+        <div class="row" style="z-index:2">
+            <div id="box1" class="col">
+                <a href="~/Sach/TrangChu"><img class="img-responsive" src="~/Image/logo.png" alt="logo"></a>
+            </div>
+            <div id="box2" class="col">
+                <div class="search-container">
+                    <form method="get" action="~Sach/TimKiem">
+                        <input type="text" name="tensach" placeholder="Tìm kiếm sản phẩm">
+                        <button>Tìm</button>
+                    </form>
+                </div>
+            </div>
+            <div class="col">
+                <div id="box3">
+                    @if (Session["taikhoan"] != null && !Session["taikhoan"].Equals(""))
+                    {
+                        if (Session["quyen"].ToString() != "admin")
+                        {
+                        <div class="dropdown">
+                            <a href="#"><i class="fa fa-user" aria-hidden="true"></i> @Session["taikhoan"]</a>
+                            <div class="dropdown-content">
+                                <a href="#">Thông tin tài khoản</a>
+                                <a href="#">Đơn hàng</a>
+                                <a href="~/Sach/DangXuat">Đăng xuất</a>
+                            </div>
+                        </div>
+                        }
+                        else
+                        {
+                            <div class="dropdown">
+                                <a href="#"><i class="fa fa-user" aria-hidden="true"></i> @Session["taikhoan"]</a>
+                                <div class="dropdown-content">
+                                    <a href="#">Thông tin tài khoản</a>
+                                    <a href="#">Đơn hàng</a>
+                                    <a href="~/Sach/DangXuat">Đăng xuất</a>
+                                </div>
+                            </div>
+                        }
+                            <a href="~/Sach/GioHang"> <i class="fa fa-shopping-cart" aria-hidden="true"></i> Giỏ hàng(@ViewBag.SoLuong)</a>
+                        if (Session["quyen"].ToString() == "admin")
+                        {
+                            <div class="dropdown">
+
+                                <a href="#"> <i class="fa fa-bars" aria-hidden="true"></i> Quản lý</a>
+                                <div class="dropdown-content">
+                                    <a href="~/Sach/QuanLy">Biểu đồ</a>
+                                    <a href="~/Sach/QuanLyKhachHang">QL khách hàng</a>
+                                    <a href="~/Sach/QuanLySanPham">Quản lý sản phẩm</a>
+                                    <a href="~/Sach/LichSuHeThong">Lịch sử hệ thống</a>
+                                    <a href="~/Sach/LichSuMuaSach">Lịch sử bán</a>
+                                </div>
+                            </div>}
+                    }
+                    else
+                    {
+                        <a href="~/Sach/DangNhap"> <i class="fa fa-sign-in"></i> Đăng nhập</a>
+                            <a href="~/Sach/DangKy"> <i class="fa fa-pencil-square-o"></i> Đăng ký</a>
+                    }
+                </div>
+
+            </div>
+        </div>
+        <div class="row1" style="z-index:1">
+            <div class="col1">
+                <div id="box1">
+                        <div class="menu1">
+                            <ul>
+                                <div id="danhmuc">
+                                    <li>DANH MỤC</li>
+                                </div>
+                                <li><a href="http://localhost:60030/Sach/SanPham">Top sách hay</a></li>
+                                <li><a href="http://localhost:60030/Sach/SanPham">Sách kinh tế</a></li>
+                                <li><a href="http://localhost:60030/Sach/SanPham">Sách tâm lý</a></li>
+                                <li><a href="http://localhost:60030/Sach/SanPham">Sách khoa học</a></li>
+                                <li><a href="http://localhost:60030/Sach/SanPham">Sách khoa học</a></li>
+                            </ul>
+                        </div>
+                </div>
+            </div>
+            <div class="col1">
+                <div id="box2">
+                    <div class="row-title1">
+                        <div id="box1-title1" class="col-title1">
+                            <ul>
+                                <li>
+                                    GIỎ HÀNG CỦA BẠN
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-title1">
+                            <div id="box2-title1">
+                            </div>
+                        </div>
+                    </div>
+                    <table>
+                        <tr>
+                            @*<th></th>*@
+                            <th>Thông tin chi tiết sản phẩm</th>
+                            <th>Đơn giá</th>
+                            <th>Số lượng</th>
+                            <th>Tổng giá</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                        @foreach (var giohang in ViewBag.GioHang)
+                        {
+                            string a = "form" + @giohang.mactgiohang;
+                            string b = "ip" + @giohang.mactgiohang;
+                            string c = "btxoa" + @giohang.mactgiohang;
+                            <tr>
+                                @*<form method="post" id="formlone">*@
+
+
+                                @*<td><img src="~/UploadedFiles/@giohang.hinhctgiohang" /></td>*@
+                                <td><a href="#">@giohang.tenctgiohang</a></td>
+                                <td>@giohang.dongia₫</td>
+                                <form action="~/Sach/GioHang" method="post" id="@a" name="suasoluong">
+                                    <input type="hidden" name="mactgh" value="@giohang.mactgiohang" id="input1" />
+                                    <td><input type="number" name="soluong" value="@giohang.soluong" style="width:50px" id="@b" /></td>
+                                </form>
+                                <td>@giohang.tongtien₫</td>
+                                <form action="~/Sach/XoaGioHang" method="get">
+                                    <input type="hidden" value="@giohang.mactgiohang" name="id" />
+                                <td>@*<a href="~/Sach/XoaGioHang?id=@giohang.mactgiohang">*@<button id="@c">Xóa</button></td>
+                                  </form>
+                                <td><a href="~/Sach/ThanhToanCTGioHang?id=@giohang.mactgiohang"><button id="btthanhtoan" style="background-color:green">Thanh toán</button></a></td>
+                            </tr>
+                        }
+                    </table>
+                    <div><p style="float:right">Tổng giá trị giỏ hàng: @ViewBag.TongGiaTien</p></div>
+                    <div><a href="~/Sach/ThanhToan?id=@Convert.ToInt32(Session["id"])"><input type="submit" value="Thanh toán" id="ipthanhtoan"></a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="social-network">
+        <div class="row-image6" id="intro=image6">
+            <div class="col-image6">
+                <div id="box1-image6">
+                    <button><i class="fa fa-facebook"></i></button>
+                </div>
+            </div>
+            <div class="col-image6">
+                <div id="box2-image6">
+                    <button><i class="fa fa-instagram"></i></button>
+                </div>
+            </div>
+
+            <div class="col-image6">
+                <div id="box3-image6">
+                    <button><i class="fa  fa-youtube-play"></i></button>
+                </div>
+            </div>
+            <div class="col-image6">
+                <div id="box4-image6">
+                    <button><i class="fa  fa-twitter"></i></button>
+                </div>
+            </div>
+            <div class="col-image6">
+                <div id="box5-image6">
+                    <button><i class="fa fa-google-plus-square"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div class="logo">
+            <img class="img-responsive" src="~/Image/logo.png" alt="logo">
+            </img>
+        </div>
+        <div class="copy-right">
+            <p>© By Phạm Tường Huy</p>
+        </div>
+    </footer>
+</body>
+</html>

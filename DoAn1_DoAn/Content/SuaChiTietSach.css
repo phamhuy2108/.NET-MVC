@@ -1,0 +1,376 @@
+﻿.search-container {
+  float: left;
+  margin-top: 15px;
+  margin-bot:auto;
+} 
+input[type="text"] {
+      width: 300px;
+      box-sizing: border-box;
+      border: 1px solid black;
+      border-radius: 0px;
+      outline:none;
+      padding: 12px 14px;
+    }
+input[type="text"]:focus{ 
+    box-sizing: border-box;
+      border: 1px solid black;
+      border-radius: 0px;
+  border-color:#FF6A6A;
+  box-shadow: 1px 1px 1px 1px #FF6A6A;
+}
+.search-container button {
+  float:right;
+  background-color: #FF6A6A;
+  border: none;
+  color: white;
+  padding: 12.9px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 15px;
+  cursor: pointer;
+  margin-bottom:0px;
+}
+.row {
+  /*overflow:hidden;*/
+  margin: em auto;
+  border-bottom: 1px solid #FF6A6A;
+  height:80px;
+}
+.row .col{
+  float:left;
+  width:29%;
+  margin-right:2em;
+}
+.row .col img{
+  display:block;
+  margin-left:5px;
+  margin-right:auto;
+  
+}
+.row .col a{
+  font-family: sans-serif;
+  font-size: 15px;
+  text-decoration: none;
+  color: #333;
+}
+#box3{
+  float:right;
+  margin-top: 25px;
+  margin-right:0px;
+}
+body {
+  font-family: sans-serif;
+  font-size: 15px;
+}
+#danhmuc li {
+  background: #FF6A6A;
+  font-size: 15px;
+  width: auto;
+  height: 40px;
+  line-height: 40px;
+  border-bottom: 1px solid #FF6A6A;
+  padding: 0 1em;
+  font-weight: bold;
+  text-align: center;
+  color: #FFFFFF;
+  list-style-image: none;
+}
+.menu1 ul {
+  background: #FFFFFF;
+  width: 250px;
+  padding: 0;
+  list-style-type: none;
+  text-align: left;
+  box-sizing: border-box;
+box-shadow: 1px 1px 1px 1px #FF6A6A;
+  margin-top:0px;
+}
+.menu1 li {
+  width: auto;
+  height: 40px;
+  line-height: 40px;
+  #FF6A6A;
+  padding: 0 3em;
+  list-style-image: url('../Image/menu1.png');
+  list-style-position: inside;
+}
+.menu1 li a {
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+}
+.menu1 li:hover {
+  background: #CDE2CD;
+}
+.row1 {
+  overflow:hidden;
+  margin: em auto;
+  height:700px;
+  /*margin-top:50px;*/
+}
+.row1 .col1 #box1{
+  float:left;
+  width:15%;
+  height:220px;
+}
+.row1 .col1 #box2{
+  float:left;
+  width:84.1%;
+  height:220px;
+}
+.DangKy{
+  margin-left:100px;
+  margin-top:50px;
+  width:35.4%;
+   height:500px;
+  text-align: center;
+   /*border: 1px solid black;*/
+}
+.DangKy p{
+  margin-left: 95.6px;
+  font-size:20px;
+text-align:center;
+ margin-top:0px;
+  padding-bottom:10px;
+  border-bottom: 1.5px solid #FF6A6A;
+  width:15.125em;
+  display: inline-block;
+  font-weight:bold;
+}
+.input-dangky{
+
+  width:33em;
+  height:auto;
+text-align: center;
+
+}
+.input-dangky input{
+  height:2em;
+  width:20em;
+   margin-bottom:20px;
+  display: inline-block;
+  font-size:15px;
+     outline:none;
+border: 1.5px solid #FF6A6A;
+}
+.input-dangky input[type=file]{
+  height:2em;
+  width:20em;
+  padding-left:16px;
+   margin-bottom:20px;
+  display: inline-block;
+  font-size:15px;
+     outline:none;
+border: 1.5px solid #FF6A6A;
+}
+.input-dangky input[type=password]{
+  height:2em;
+  width:20em;
+  padding-left:16px;
+   margin-bottom:20px;
+  display: inline-block;
+  font-size:15px;
+     outline:none;
+border: 1.5px solid #FF6A6A;
+}
+.input-dangky input[type=submit]{
+  height:2.5em;
+  width:20.45em;
+  margin-bottom:20px;
+  background-color:#FF6A6A;
+  border-radius: 5px;
+  cursor: pointer;
+  color: #fff;
+   border:0;
+  display: inline-block;
+    font-size:15px;
+  font-weight:bold;
+}
+.input-dangky ul{
+  height:2em;
+  width:13em;
+   display: inline-block;
+margin-top:0px;
+  padding-left:3px ;
+  list-style-type: none;
+  font-size:15px;
+}
+.input-dangky li{
+  margin-bottom:20px;
+  margin-top:0px;
+  font-size:15px;
+  color:#FF6A6A;
+  font-weight:bold;
+}
+.input-dangky1{
+     height:1.8em;
+  width:19.75em;
+      /*border: 1.5px solid #FF6A6A;*/
+       margin-bottom:20px;
+text-align: center;
+margin-left:98px;
+}
+.input-dangky1 p {
+     /*margin-left: 95.6px;*/
+  font-size:14px;
+text-align:left;
+ margin-top:0px;
+ margin-left:0px;
+ margin-right:0px;
+ padding-top:5px;
+  /*padding-bottom:10px;*/
+  border-bottom: none;
+  height:1em;
+  width:7em;
+  display: inline-block;
+  font-weight:bold;
+  float:left;
+  color:#FF6A6A;
+  /*border: 1.5px solid #FF6A6A;*/
+}
+ .input-dangky1 input {
+  height:100%;
+  margin-left:0px;
+      /*border: 1.5px solid #FF6A6A;*/
+  float:left;
+  width:150px;
+    }
+ .input-dangky2{
+     height:1.8em;
+  width:30em;
+      /*border: 1.5px solid #FF6A6A;*/
+       margin-bottom:20px;
+text-align: center;
+margin-left:98px;
+}
+.input-dangky2 p {
+     /*margin-left: 95.6px;*/
+  font-size:14px;
+text-align:left;
+ margin-top:0px;
+ margin-left:0px;
+ margin-right:0px;
+ padding-top:5px;
+  /*padding-bottom:10px;*/
+  border-bottom: none;
+  height:1em;
+  width:7em;
+  display: inline-block;
+  font-weight:bold;
+  float:left;
+  color:#FF6A6A;
+  /*border: 1.5px solid #FF6A6A;*/
+}
+ .input-dangky2 input {
+  height:100%;
+  margin-left:0px;
+      /*border: 1.5px solid #FF6A6A;*/
+  float:left;
+  width:350px;
+    }
+  .input-dangky3{
+     height:20em;
+  width:30em;
+      /*border: 1.5px solid #FF6A6A;*/
+       margin-bottom:20px;
+text-align: center;
+margin-left:98px;
+}
+.input-dangky3 p {
+     /*margin-left: 95.6px;*/
+  font-size:14px;
+text-align:left;
+ margin-top:0px;
+ margin-left:0px;
+ margin-right:0px;
+ padding-top:5px;
+  /*padding-bottom:10px;*/
+  border-bottom: none;
+  height:1em;
+  width:7em;
+  display: inline-block;
+  font-weight:bold;
+  float:left;
+  color:#FF6A6A;
+  /*border: 1.5px solid #FF6A6A;*/
+}
+ .input-dangky3 textarea {
+  height:100%;
+  margin-left:0px;
+      /*border: 1.5px solid #FF6A6A;*/
+  float:left;
+  width:350px;
+  border:1.5px solid #FF6A6A;
+    }
+.row-image6 {
+  overflow:hidden;
+  display:flex;
+  width:1001px;
+  height:50px;
+}
+.row-image6 .col-image6{
+  height: 100px;
+  width:100px;
+border-style: solid;
+  border-width: 1.5px;
+  border-color: #EEEEEE;
+  margin-left:0px;
+  margin-right:98px;
+}
+.row-image6 .col-image6 button{ 
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  height:47px;
+  width:200px;
+}
+#box1-image6 button{
+ background-color:#3333CC;
+   font-size:20px;
+  color:white;
+  border: none;
+}
+#box2-image6 button{
+ background-color:#CC0066;
+   font-size:20px;
+  color:white;
+  border: none;
+}
+#box3-image6 button{
+ background-color:red;
+   font-size:20px;
+  color:white;
+  border: none;
+}
+#box4-image6 button{
+ background-color:#3399FF;
+   font-size:20px;
+  color:white;
+  border: none;
+}
+#box5-image6 button{
+ background-color:#FF3333;
+   font-size:20px;
+  color:white;
+  border: none;
+}
+.social-network{
+ display: flex;
+ justify-content: center;
+ margin-top: 100px;
+}
+.logo{
+   display: flex;
+  justify-content: center;
+}
+footer{
+  margin-top:0px;
+  background-color:#888888;
+}
+.copy-right
+{
+ display: flex;
+  justify-content: center;
+  font-size:15px;
+}

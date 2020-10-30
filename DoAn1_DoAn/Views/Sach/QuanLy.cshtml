@@ -1,0 +1,369 @@
+﻿
+@{
+    Layout = null;
+}
+@Styles.Render("~/Content/QuanLySanPham.css")
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <title>Quản lý</title>
+    <script type='text/javascript' src='http://d3js.org/d3.v3.min.js'></script>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        .dropbtn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 16px;
+            font-size: 16px;
+            border: none;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f1f1f1;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+            .dropdown-content a {
+                color: black;
+                padding: 12px 16px;
+                text-decoration: none;
+                display: block;
+            }
+
+                .dropdown-content a:hover {
+                    background-color: #ddd;
+                }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown:hover .dropbtn {
+            background-color: #3e8e41;
+        }
+
+        body {
+            font: 10px sans-serif;
+        }
+
+        .axis path,
+        .axis line {
+            fill: none;
+            stroke: #000;
+            shape-rendering: crispEdges;
+        }
+
+        .bar {
+            fill: orange;
+        }
+
+            .bar:hover {
+                fill: orangered;
+            }
+
+        .x.axis path {
+            display: none;
+        }
+
+        .d3-tip {
+            line-height: 1;
+            font-weight: bold;
+            padding: 12px;
+            background: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            border-radius: 2px;
+        }
+
+            /* Creates a small triangle extender for the tooltip */
+            .d3-tip:after {
+                box-sizing: border-box;
+                display: inline;
+                font-size: 10px;
+                width: 100%;
+                line-height: 1;
+                color: rgba(0, 0, 0, 0.8);
+                content: "\25BC";
+                position: absolute;
+                text-align: center;
+            }
+
+            /* Style northward tooltips differently */
+            .d3-tip.n:after {
+                margin: -1px 0 0 0;
+                top: 100%;
+                left: 0;
+            }
+    </style>
+</head>
+<body id="bd1">
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.0.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#bttim").click(function (e) {
+                e.preventDefault();
+                $.ajax({
+                    type: "GET",
+                    url: "@Url.Action("TimKiemSanPham","Sach")",
+                    data: { tensach: $("#ipemail").val() },
+                    success: function (data) {
+                        $("#bd1").html(data);
+                    }
+                });
+            });
+        });
+    </script>
+    <header>
+        <div class="row">
+            <div id="box1" class="col">
+                <a href="~/Sach/TrangChu"><img class="img-responsive" src="~/Image/logo.png" alt="logo"></a>
+            </div>
+            <div id="box2" class="col">
+                <div class="search-container">
+                    <form action="~/Sach/TimKiem">
+                        <input type="text" name="tensach" placeholder="Tìm kiếm sản phẩm">
+                        <button>Tìm</button>
+                    </form>
+                </div>
+            </div>
+            <div class="col">
+                <div id="box3">
+                    <div class="dropdown">
+                        <a href="#"><i class="fa fa-user" aria-hidden="true"></i> @Session["taikhoan"]</a>
+                        <div class="dropdown-content">
+                            <a href="#">Thông tin tài khoản</a>
+                            <a href="#">Đơn hàng</a>
+                            <a href="~/Sach/DangXuat">Đăng xuất</a>
+                        </div>
+                    </div>
+                    <a href="~/Sach/GioHang"> <i class="fa fa-shopping-cart" aria-hidden="true"></i> Giỏ hàng(@ViewBag.SoLuong)</a>
+                    <div class="dropdown">
+
+                        <a href="#"> <i class="fa fa-bars" aria-hidden="true"></i> Quản lý</a>
+                        <div class="dropdown-content">
+                            <a href="~/Sach/QuanLy">Biểu đồ</a>
+                            <a href="~/Sach/QuanLyKhachHang">QL khách hàng</a>
+                            <a href="~/Sach/QuanLySanPham">Quản lý sản phẩm</a>
+                            <a href="~/Sach/LichSuHeThong">Lịch sử hệ thống</a>
+                            <a href="~/Sach/LichSuMuaSach">Lịch sử bán</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </header>
+    <script type='text/javascript'>//<![CDATA[
+window.onload=function(){
+
+}//]]> 
+
+</script>
+
+</head>
+<body>
+ 
+  <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+<script>
+
+var margin = {top: 40, right: 20, bottom: 30, left: 40},
+    width = 960 - margin.left - margin.right,
+    height = 500 - margin.top - margin.bottom;
+
+var formatPercent = d3.format(".0%");
+
+var x = d3.scale.ordinal()
+    .rangeRoundBands([0, width], .1);
+
+var y = d3.scale.linear()
+    .range([height, 0]);
+
+var xAxis = d3.svg.axis()
+    .scale(x)
+    .orient("bottom");
+
+var yAxis = d3.svg.axis()
+    .scale(y)
+    .orient("left")
+    .tickFormat(formatPercent);
+
+var tip = d3.tip()
+  .attr('class', 'd3-tip')
+  .offset([-10, 0])
+  .html(function(d) {
+    return "<strong>Frequency:</strong> <span style='color:red'>" + d.frequency + "</span>";
+  })
+
+var svg = d3.select("body").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+svg.call(tip);
+
+    // The new data variable.
+@*var data = [];
+    @foreach(var a in ViewBag.ABCD)
+    {
+        @: data.push( {letter: @a.thang, frequency: .08167},)
+        }*@
+    
+    var data =  @{@Html.Raw(Json.Encode(ViewBag.BCD));}
+        alert(data[0].letter);
+    // The following code was contained in the callback function.
+    x.domain(data.map(function(d) { return d.letter; }));
+y.domain([0, d3.max(data, function(d) { return d.frequency; })]);
+
+svg.append("g")
+    .attr("class", "x axis")
+    .attr("transform", "translate(0," + height + ")")
+    .call(xAxis);
+
+svg.append("g")
+    .attr("class", "y axis")
+    .call(yAxis)
+  .append("text")
+    .attr("transform", "rotate(-90)")
+    .attr("y", 6)
+    .attr("dy", ".71em")
+    .style("text-anchor", "end")
+    .text("Frequency");
+
+svg.selectAll(".bar")
+    .data(data)
+  .enter().append("rect")
+    .attr("class", "bar")
+    .attr("x", function(d) { return x(d.letter); })
+    .attr("width", x.rangeBand())
+    .attr("y", function(d) { return y(d.frequency); })
+    .attr("height", function(d) { return height - y(d.frequency); })
+    .on('mouseover', tip.show)
+    .on('mouseout', tip.hide)
+
+function type(d) {
+  d.frequency = +d.frequency;
+  return d;
+}
+
+</script>
+<script>
+
+var margin = {top: 40, right: 20, bottom: 30, left: 40},
+    width = 650 - margin.left - margin.right,
+    height = 500 - margin.top - margin.bottom;
+
+var formatPercent = d3.format(".0%");
+
+var x = d3.scale.ordinal()
+    .rangeRoundBands([0, width], .1);
+
+var y = d3.scale.linear()
+    .range([height, 0]);
+
+var xAxis = d3.svg.axis()
+    .scale(x)
+    .orient("bottom");
+
+var yAxis = d3.svg.axis()
+    .scale(y)
+    .orient("left")
+    .tickFormat(formatPercent);
+
+var tip = d3.tip()
+  .attr('class', 'd3-tip')
+  .offset([-10, 0])
+  .html(function(d) {
+    return "<strong>Frequency:</strong> <span style='color:red'>" + d.frequency + "</span>";
+  })
+
+var svg = d3.select("body").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+svg.call(tip);
+
+// The new data variable.
+var data = [
+  {letter: "A", frequency: .08167},
+  {letter: "B", frequency: .01492},
+  {letter: "C", frequency: .02780},
+  {letter: "D", frequency: .04253},
+  {letter: "E", frequency: .12702},
+  {letter: "F", frequency: .02288},
+  {letter: "G", frequency: .02022},
+  {letter: "H", frequency: .06094},
+  {letter: "I", frequency: .06973},
+  {letter: "J", frequency: .00153},
+  {letter: "K", frequency: .00747},
+  {letter: "L", frequency: .04025},
+  {letter: "M", frequency: .02517},
+  {letter: "N", frequency: .06749},
+  {letter: "O", frequency: .07507},
+  {letter: "P", frequency: .01929},
+  {letter: "Q", frequency: .00098},
+  {letter: "R", frequency: .05987},
+  {letter: "S", frequency: .06333},
+  {letter: "T", frequency: .09056},
+  {letter: "U", frequency: .02758},
+  {letter: "V", frequency: .01037},
+  {letter: "W", frequency: .02465},
+  {letter: "X", frequency: .00150},
+  {letter: "Y", frequency: .01971},
+  {letter: "Z", frequency: .00074}
+];
+
+// The following code was contained in the callback function.
+x.domain(data.map(function(d) { return d.letter; }));
+y.domain([0, d3.max(data, function(d) { return d.frequency; })]);
+
+svg.append("g")
+    .attr("class", "x axis")
+    .attr("transform", "translate(0," + height + ")")
+    .call(xAxis);
+
+svg.append("g")
+    .attr("class", "y axis")
+    .call(yAxis)
+  .append("text")
+    .attr("transform", "rotate(-90)")
+    .attr("y", 6)
+    .attr("dy", ".71em")
+    .style("text-anchor", "end")
+    .text("Frequency");
+
+svg.selectAll(".bar")
+    .data(data)
+  .enter().append("rect")
+    .attr("class", "bar")
+    .attr("x", function(d) { return x(d.letter); })
+    .attr("width", x.rangeBand())
+    .attr("y", function(d) { return y(d.frequency); })
+    .attr("height", function(d) { return height - y(d.frequency); })
+    .on('mouseover', tip.show)
+    .on('mouseout', tip.hide)
+
+function type(d) {
+  d.frequency = +d.frequency;
+  return d;
+}
+
+</script>
+    @*<script type="text/javascript">
+    var mn =  @{@Html.Raw(Json.Encode(ViewBag.ABCD));}
+    alert(mn[0].thang);
+    </script>*@
+</body>
+</html>

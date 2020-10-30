@@ -1,0 +1,204 @@
+﻿
+@{
+    Layout = null;
+}
+@Styles.Render("~/Content/DangKy.css")
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <title>Sửa thông tin khách hàng</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        .dropbtn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 16px;
+            font-size: 16px;
+            border: none;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f1f1f1;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+            .dropdown-content a {
+                color: black;
+                padding: 12px 16px;
+                text-decoration: none;
+                display: block;
+            }
+
+                .dropdown-content a:hover {
+                    background-color: #ddd;
+                }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown:hover .dropbtn {
+            background-color: #3e8e41;
+        }
+    </style>
+</head>
+<body>
+    <style>
+        .BCD{
+            margin-bottom:50px;
+        }
+        .BCD select{
+            float:left;
+            margin-left:100px;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <header>
+        
+    </header>
+    <div class="abc">
+        <div class="row">
+            <div id="box1" class="col" style="z-index:2">
+                <a href="~/Sach/TrangChu"><img class="img-responsive" src="~/Image/logo.png" alt="logo"></a>
+            </div>
+            <div id="box2" class="col">
+                <div class="search-container">
+                    <form method="get" action="~/Sach/TimKiem">
+                        <input type="text" name="tensach" placeholder="Tìm kiếm sản phẩm">
+                        <button>Tìm</button>
+                    </form>
+                </div>
+            </div>
+            <div class="col">
+                <div id="box3">
+                    <div class="dropdown">
+                        <a href="#"><i class="fa fa-user" aria-hidden="true"></i> @Session["taikhoan"]</a>
+                        <div class="dropdown-content">
+                            <a href="#">Thông tin tài khoản</a>
+                            <a href="#">Đơn hàng</a>
+                            <a href="~/Sach/DangXuat">Đăng xuất</a>
+                        </div>
+                    </div>
+                    <a href="~/Sach/GioHang"> <i class="fa fa-shopping-cart" aria-hidden="true"></i> Giỏ hàng(@ViewBag.SoLuong)</a>
+                    <div class="dropdown">
+
+                        <a href="#"> <i class="fa fa-bars" aria-hidden="true"></i> Quản lý</a>
+                        <div class="dropdown-content">
+                            <a href="~/Sach/QuanLy">Biểu đồ</a>
+                            <a href="~/Sach/QuanLyKhachHang">QL khách hàng</a>
+                            <a href="~/Sach/QuanLySanPham">Quản lý sản phẩm</a>
+                            <a href="~/Sach/LichSuHeThong">Lịch sử hệ thống</a>
+                            <a href="~/Sach/LichSuMuaSach">Lịch sử bán</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row1" style="z-index:1">
+            <div class="col1">
+                <div id="box1">
+                    <div class="menu1">
+                        <ul>
+                            <div id="danhmuc">
+                                <li>DANH MỤC</li>
+                            </div>
+                            <li><a href="http://localhost:60030/Sach/SanPham">Top sách hay</a></li>
+                            <li><a href="http://localhost:60030/Sach/SanPham">Sách kinh tế</a></li>
+                            <li><a href="http://localhost:60030/Sach/SanPham">Sách tâm lý</a></li>
+                            <li><a href="http://localhost:60030/Sach/SanPham">Sách khoa học</a></li>
+                            <li><a href="http://localhost:60030/Sach/SanPham">Sách khoa học</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col1">
+                <div id="box2">
+                    <div class="DangKy">
+                        <P>SỬA THÔNG TIN KHÁCH HÀNG</P>
+                        <div class="input-dangky">
+                            <form action="~/Sach/SuaKhach" method="post">
+                                <input type="hidden" name="makh" value="@ViewBag.SuaKhach.makh" />
+                                <input type="text" placeholder="Tên" name="ten" value="@ViewBag.SuaKhach.ten">
+                                <input type="text" placeholder="Họ" name="ho" value="@ViewBag.SuaKhach.ho">
+                                <input type="text" placeholder="Địa chỉ" name="diachi" value="@ViewBag.SuaKhach.diachi">
+                                <input type="text" placeholder="Số điện thoại" name="sdt" value="@ViewBag.SuaKhach.sdt">
+                                <input type="text" placeholder="Email" name="email" value="@ViewBag.SuaKhach.email">
+                                <input type="password" placeholder="Mật khẩu" name="matkhau" value="@ViewBag.SuaKhach.matkhau">
+                                <input type="password" placeholder="Nhập lại mật khẩu" name="nhaplaimatkhau" value="@ViewBag.SuaKhach.nhaplaimatkhau">
+                                <div class="BCD">
+                                    <select name="quyen" id="quyen" style="height:30px">
+                                        @if (ViewBag.SuaKhach.quyen == "admin")
+                                        {
+                                            <option>admin</option>
+                                            <option>user</option>
+                                        }
+                                        else
+                                        {
+                                            <option>user</option>
+                                            <option>admin</option>
+                                        }
+                                    </select>
+                                </div>
+                                <input type="submit" value="Sửa">
+                            </form>
+                            <ul>
+                                <li>Trang chủ</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="social-network">
+        <div class="row-image6" id="intro=image6">
+            <div class="col-image6">
+                <div id="box1-image6">
+                    <button><i class="fa fa-facebook"></i></button>
+                </div>
+            </div>
+            <div class="col-image6">
+                <div id="box2-image6">
+                    <button><i class="fa fa-instagram"></i></button>
+                </div>
+            </div>
+
+            <div class="col-image6">
+                <div id="box3-image6">
+                    <button><i class="fa  fa-youtube-play"></i></button>
+                </div>
+            </div>
+            <div class="col-image6">
+                <div id="box4-image6">
+                    <button><i class="fa  fa-twitter"></i></button>
+                </div>
+            </div>
+            <div class="col-image6">
+                <div id="box5-image6">
+                    <button><i class="fa fa-google-plus-square"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div class="logo">
+            <img class="img-responsive" src="~/Image/logo.png" alt="logo">
+            </img>
+        </div>
+        <div class="copy-right">
+            <p>© By Phạm Tường Huy</p>
+        </div>
+    </footer>
+</body>
+</html>
